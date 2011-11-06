@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/WebService-CityGrid-Ads-Custom.t
+lib/WebService/CityGrid/Ads/Custom.pm
