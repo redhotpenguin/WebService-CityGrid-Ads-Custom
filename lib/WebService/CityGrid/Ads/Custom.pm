@@ -59,6 +59,7 @@ sub query {
     }
     $url = substr( $url, 0, length($url) - 1 );
 
+
     $Ua->timeout( $self->timeout );
     my $res = $Ua->get($url);
 
@@ -70,7 +71,7 @@ sub query {
     my @results;
     foreach my $ad (@ads) {
 
-        warn( "raw location: " . $ad->toString ) if DEBUG;
+        warn( "raw ad: " . $ad->toString ) if DEBUG;
 
         my %new_args;
         foreach my $attr (
@@ -85,7 +86,7 @@ sub query {
             my $val = $ad->getElementsByTagName($attr);
             if ($val) {
                 my $firstchild = $val->[0]->firstChild;
-                $new_args{$attr} = $firstchild->data if $firstchild;
+                $new_args{$attr} = ($firstchild) ? $firstchild->data : '';
             }
         }
 
@@ -95,7 +96,6 @@ sub query {
 
         push @results, $result;
     }
-
     return \@results;
 }
 
@@ -127,7 +127,8 @@ has 'gross_ppe'             => ( is => 'ro', isa => 'Str', required => 1 );
 has 'reviews'               => ( is => 'ro', isa => 'Str', required => 0 );
 has 'offers'                => ( is => 'ro', isa => 'Str', required => 0 );
 has 'distance'              => ( is => 'ro', isa => 'Str', required => 0 );
-has 'attribution_text'      => ( is => 'ro', isa => 'Str', required => 0 );
+has 'attribution_text'      => ( is => 'ro', isa => 'Str', required => 1 );
+has 'top_hit' 	            => ( is => 'ro', isa => 'Bool', required => 0 );
 
 =cut
 
