@@ -59,6 +59,7 @@ sub query {
     }
     $url = substr( $url, 0, length($url) - 1 );
 
+    warn("cg query $url") if DEBUG;
 
     $Ua->timeout( $self->timeout );
     my $res = $Ua->get($url);
@@ -128,7 +129,7 @@ has 'reviews'               => ( is => 'ro', isa => 'Str', required => 0 );
 has 'offers'                => ( is => 'ro', isa => 'Str', required => 0 );
 has 'distance'              => ( is => 'ro', isa => 'Str', required => 0 );
 has 'attribution_text'      => ( is => 'ro', isa => 'Str', required => 1 );
-has 'top_hit' 	            => ( is => 'ro', isa => 'Bool', required => 0 );
+has 'top_hit' 	            => ( is => 'rw', isa => 'Bool', required => 0 );
 
 =cut
 
